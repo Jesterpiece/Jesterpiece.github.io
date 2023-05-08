@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+    <title>Onions Clicker III</title>
+  </head>
+  <body>
+
+<div class="main">
+  <div class="box">
+    <h1>Onion Clicker III</h1>
+	<div id="app">
+    <div class="frame">
+	  <object id="harvest-btn" onclick="handleHarvestClick()">
+      <img class="onion" src="svg/onion.svg" type="image/svg+xml">
+    </object>
+  </div>
+	  <br>
+	  <p class="KGofOnions">KG of Onions: <span id="kg-onions">0</span></p> <br>
+
+	  <pr>Per Harvest: <span id="per-harvest">1</span></pr>
+	  <pr>Per Workers: <span id="per-workers">0</span></pr><br>
+	  <pr>Cash: <span id="cash">0</span></pr>
+	  <div class="stock">
+	  Onion Market Price: <span id="stock-price">1</span> (<span id="stock-change">0%</span>)
+	  <canvas class="chart" id="stockchart"></canvas>
+	  </div>
+    <div class="probablynotneededbutimstupid"><button id="sell-btn" disabled>Sell Onions</button></div>
+	  <p>Stock updates in: <span id="stock-updates"></span></p>
+	</div>
+
+<div class="context-upgrade">
+    <h3>Upgrades</h3>
+    <button>Harvest Speed</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+    <br>
+    <button>Bigger Onions</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+    <br>
+    <button>Worker Speed</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+    <br>
+    <button>Market Manipulation</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+  </div>
+
+
+  <div class="context-upgrade">
+    <h3>Workers: </h3>
+    <button>Monkey</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+    <br>
+    <button>POW</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+    <br>
+    <button>Worker</button> <pr>LVL: <span>0</span></pr> <br>
+    <pr>Cost: <span>0</span></pr>
+  </div>
+  </div>
+  <div class="box">
+    <h1>Onions?</h1>
+    <p>Current goals:</p>
+    <p>-Make chart work- Done</p>
+    <p>-Add Upgrades</p>
+    <p>-Add Workers</p>
+    <p>-Add Achievements</p>
+    <p>?</p>
+  </div>
+  
+  <div class="box">
+    <h1>Side Menus</h1>
+    <p>Achievements</p>
+  </div>
+  <div class="yeahfooter"><center>Onion Clicker 3 - ver 0.2.4 - Prototype</center></div>
+  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="script.js">
+</script>
+</html>
