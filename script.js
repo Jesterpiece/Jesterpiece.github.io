@@ -119,3 +119,13 @@ function updateStockPrice() {
 // Update the stock price every 30 seconds
 updateStockPrice(); // Update stock price on page load
 setInterval(updateStockPrice, 30000);
+
+// Make Onion scale on click
+const svg = document.getElementById('OnionButton');
+
+svg.addEventListener('click', function() {
+  svg.classList.add('animate');
+  setTimeout(function() {
+    svg.classList.remove('animate');
+  }, 100);
+});
