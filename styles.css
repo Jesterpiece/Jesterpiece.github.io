@@ -1,17 +1,20 @@
+* {
+	padding: 0;
+	margin: 0;
+}
 body {
-	height: 100%;
 	background-color: black;
 	color: white;
 }
 .main {
 	display: flex;
     justify-content: space-between;
-	margin-bottom: 50px;
 }
 .svgcontainer {
 	max-width:350px; 
 	border-style:solid; border-width: 2px;
 	padding-top: 10px;
+	margin: 0 auto;
 } 
 .onion {
 	display: block;
@@ -29,7 +32,7 @@ body {
 	width: 33.33%;
 	height: inherit;
 	border-right-style: dotted;
-	padding-left: 10px;
+	padding-left: 10px; padding-right: 10px;
 }
 .onion {
 	max-width: 25%;
@@ -37,26 +40,19 @@ body {
 	height: auto;
 }
   .stock {
-	max-width: 350px;
+	max-width: 348px;
     background-color: black;
     border-style: solid;
     border-width: 2px;
     color: white;
+	margin: 0 auto;
 }
 	
- .chart {
- 	padding-top: 5px;
- 	position:relative;
-  	border-style: dotted;
-	border-width: 1px;
-	max-width: 100%;
-    color: white;
-}
 .Numberdisplay {
 	max-width: 348px;
 	font-weight: bold;
 	border-style: solid; border-width: 2px;
-	padding-left: 2px;
+	margin: 0 auto;
 }
  .footer {
 	border-top: dotted;
@@ -76,16 +72,15 @@ body {
 	background-color: black;
 } 
 .progress {
-	height: 60%;
+	height: 100%;
 	background-color: #fff;
 	width: 0%;
 }
 .context-upgrade {
 	border-style: solid; border-width: 2px; border-color:#fff;
 	max-width: 350px;
-}
-.secondmistake {
-	margin-top: 5px; margin-bottom: 5px;
+	margin: 0 auto;
+	margin-top: 5px;
 }
 .worker {
 	font-weight: bold;
@@ -105,16 +100,11 @@ body {
 	padding-left: 5px;
 }
 button:disabled {
-	border-style: solid; border-color: darkred;
-	background-color: black;
-	color: darkred;
-}
-button:disabled {
 	border-style: dashed; border-color: darkred;
 	background-color: black;
 	color: darkred;
 	font: inherit;
-	font: inherit; font-size: 15px;
+	font-size: 15px;
 	padding-left: 2px; padding-right: 2px;
 }
 button:active {
@@ -130,7 +120,4 @@ button {
 	color: white;
 	font: inherit; font-size: 15px;
 	padding-left: 2px; padding-right: 2px;
-}
-.Sell_Btn {
-	margin-bottom: 15px;
 }

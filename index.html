@@ -9,6 +9,7 @@
 
 <div class="main">
   <div class="box">
+    <div class="center">
     <h1>Onion Clicker III</h1> 
 
                 <div class="svgcontainer">
@@ -26,31 +27,45 @@
 	  Onion Market Price: <span id="stock-price">1</span> (<span id="stock-change">0%</span>) <span id="stock-updates"></span>
 	  <canvas class="chart" id="stockchart"></canvas>
 	  </div>
-    <div class="Numberdisplay">Cash: <span id="cash">0</span></div>
-    <div class="Sell_Btn"><button id="sell-btn" disabled>Sell Onions</button></div>
+    <div class="Numberdisplay"><button id="sell-btn" disabled>Sell Onions</button> Cash: <span id="cash">0</span></div>
 
 <!--Workers-->
 <div class="context-upgrade">
-  <h3>Workers: <button class="1x_buy">1x</button><button class="10x_buy">10x</button><button class="100x_buy">100x</button></h3>
+    <h3>Workers: <button class="1x_buy">1x</button><button class="10x_buy">10x</button><button class="100x_buy">100x</button></h3>
   <!--Monkey-->
-  <div class="worker" id="monkey">
-    <button id="monkey-buy" class="buy-btn">Buy</button> Monkey
-  </div>
+    <div class="worker" id="monkey">
+      <button id="monkey-buy" class="buy-btn">Buy</button> Monkey
+    </div>
   <!--Monkey bar-->
-  <div class="progress-bar" id="monkey-progress">
-    <div class="progress"></div>
-  </div>
+    <div class="progress-bar" id="monkey-progress">
+      <div class="progress" id="monkey-progress-bar">
+      </div>
+    </div>
   <!--Monkey sub-->
-  <div class="workersub">Level: <span id="monkey-amt"></span>0</div>
-  <div class="workersub">-Cost: <span id="monkey-cost"></span>99</div>
-  <div class="workersub">-Per Harvest: <span id="monkey-harvest">2</span>KG of Onions</div>
-  <div class="description">(Does not work currently) This monkey wants money instead of bananas? bit weird! how could that be!</div>
+        <div class="workersub">Level: <span id="monkey-lvl"></span></div>
+        <div class="workersub">-Cost: <span id="monkey-cost"></span></div>
+        <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of Onions</div>
+        <div class="description">This monkey wants money instead of bananas? bit weird! how could that be!
+        </div>
   
   <!-------------------------------------------------------------------------------------------------------->
     
+  <div class="worker" id="clown">
+    <button id="clown-buy" class="buy-btn">Buy</button> Clown
   </div>
- <!--END Workers-->
-
+<!--Clown bar-->
+  <div class="progress-bar" id="clown-progress">
+    <div class="progress" id="clown-progress-bar">
+    </div>
+  </div>
+<!--Clown sub-->
+      <div class="workersub">Level: <span id="clown-lvl"></span></div>
+      <div class="workersub">-Cost: <span id="clown-cost"></span></div>
+      <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of Onions</div>
+      <div class="description">This retard thinks he is better than Jesters, but now? He serves under you.
+      </div>
+    </div> <!--Center-->
+  </div>  <!--Box-->
 
 
 
@@ -69,7 +84,7 @@
     <h1>Side Menus</h1>
     <p>Achievements</p>
   </div>
-  <div class="footer"><center>Onion Clicker 3 - ver 0.0.2 - Prototype</center></div>
+  <div class="footer"><center>Onion Clicker 3 - ver 0.0.3 - Prototype</center></div>
   </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="script.js">
