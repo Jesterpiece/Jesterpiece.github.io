@@ -2,15 +2,14 @@
 <html lang="en">
   <head>
   	<meta charset="UTF-8">
+  <link rel="icon" href="svg/onion.svg">
 	<link rel="stylesheet" href="styles.css">
     <title>Onions Clicker III</title>
   </head>
   <body>
-
+<div class="Header">Onion Clicker III</div>
 <div class="main">
-  <div class="box">
-    <div class="center">
-    <h1>Onion Clicker III</h1> 
+  <div class="box"> 
 
                 <div class="svgcontainer">
                   <object id="harvest-btn" onclick="handleHarvestClick()"> <!--The Onion-->
@@ -30,61 +29,77 @@
     <div class="Numberdisplay"><button id="sell-btn" disabled>Sell Onions</button> Cash: <span id="cash">0</span></div>
 
 <!--Workers-->
-<div class="context-upgrade">
-    <h3>Workers: <button class="1x_buy">1x</button><button class="10x_buy">10x</button><button class="100x_buy">100x</button></h3>
+<div class="context">
+  <h3>Workers: 
+    <button class="buy-multiple-btn" data-value="1">1x</button>
+    <button class="buy-multiple-btn" data-value="10">10x</button>
+    <button class="buy-multiple-btn" data-value="100">100x</button>
+  </h3>
+  
   <!--Monkey-->
-    <div class="worker" id="monkey">
-      <button id="monkey-buy" class="buy-btn">Buy</button> Monkey
-    </div>
+  <div class="worker" id="monkey">
+    <button id="monkey-buy" class="buy-btn">Buy</button> Monkey
+  </div>
+  
   <!--Monkey bar-->
-    <div class="progress-bar" id="monkey-progress">
-      <div class="progress" id="monkey-progress-bar">
-      </div>
-    </div>
+  <div class="progress-bar" id="monkey-progress">
+    <div class="progress" id="monkey-progress-bar"></div>
+  </div>
+  
   <!--Monkey sub-->
-        <div class="workersub">Level: <span id="monkey-lvl"></span></div>
-        <div class="workersub">-Cost: <span id="monkey-cost"></span></div>
-        <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of Onions</div>
-        <div class="description">This monkey wants money instead of bananas? bit weird! how could that be!
-        </div>
+  <div class="workersub">Level: <span id="monkey-lvl"></span></div>
+  <div class="workersub">-Cost: <span class="worker-cost" id="monkey-cost"></span></div>
+  <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of Onions</div>
+  <div class="description">This monkey wants money instead of bananas? bit weird! how could that be!
+  </div>
   
   <!-------------------------------------------------------------------------------------------------------->
-    
+  
   <div class="worker" id="clown">
     <button id="clown-buy" class="buy-btn">Buy</button> Clown
   </div>
-<!--Clown bar-->
+  
+  <!--Clown bar-->
   <div class="progress-bar" id="clown-progress">
-    <div class="progress" id="clown-progress-bar">
-    </div>
+    <div class="progress" id="clown-progress-bar"></div>
   </div>
-<!--Clown sub-->
-      <div class="workersub">Level: <span id="clown-lvl"></span></div>
-      <div class="workersub">-Cost: <span id="clown-cost"></span></div>
-      <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of Onions</div>
-      <div class="description">This retard thinks he is better than Jesters, but now? He serves under you.
-      </div>
-    </div> <!--Center-->
+  
+  <!--Clown sub-->
+  <div class="workersub">Level: <span id="clown-lvl"></span></div>
+  <div class="workersub">-Cost: <span class="worker-cost" id="clown-cost"></span></div>
+  <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of Onions</div>
+  <div class="description">This retard thinks he is better than Jesters, but now? He serves under you.
+  </div>
   </div>  <!--Box-->
 
 
 
   </div>
   <div class="box">
-    <h1>Onions?</h1>
-    <p>Current goals:</p>
-    <p>-Make chart work- Done</p>
-    <p>-Add Upgrades</p>
-    <p>-Add Workers</p>
-    <p>-Add Achievements</p>
-    <p>?</p>
+    <div class="context">
+    <h3>Current Goals, Either done or not</h3>
+      <div class="description">
+      <ul>
+        <li>Make Chart Work - Done</li>
+        <li>Make Workers Work - Done</li>
+        <li>Add Upgrades</li>
+        <li>Add Achievements</li>
+        <li>Add Shops?</li>
+        <li>?</li>
+
+      </ul>
+      </div>
+  </div>
   </div>
   
   <div class="box">
-    <h1>Side Menus</h1>
-    <p>Achievements</p>
+    <div class="context">
+      <h3>Side Menus?</h3>
+        <div class="description"> Some Random Text
+        </div>
   </div>
-  <div class="footer"><center>Onion Clicker 3 - ver 0.0.3 - Prototype</center></div>
+  </div>
+  <div class="footer"><center>ver 0.0.4 - Prototype</center></div>
   </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="script.js">
