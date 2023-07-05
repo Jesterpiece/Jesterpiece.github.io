@@ -6,6 +6,19 @@ body {
 	background-color: black;
 	color: white;
 }
+.Header {
+	width: 100%;
+	padding-left: 10px; padding-top: 2px;
+	border-bottom-style:solid; border-width: 2px;
+}
+.footer {
+	border-top: solid;
+	border-width: 2px;
+	width: 100%;
+	position:fixed;
+	bottom:0;
+	background-color: black;
+}
 .main {
 	display: flex;
     justify-content: space-between;
@@ -15,6 +28,7 @@ body {
 	border-style:solid; border-width: 2px;
 	padding-top: 10px;
 	margin: 0 auto;
+	margin-top: 17px;
 } 
 .onion {
 	display: block;
@@ -30,8 +44,6 @@ body {
 .box {
 	display: inline-block;
 	width: 33.33%;
-	height: inherit;
-	border-right-style: dotted;
 	padding-left: 10px; padding-right: 10px;
 }
 .onion {
@@ -54,17 +66,6 @@ body {
 	border-style: solid; border-width: 2px;
 	margin: 0 auto;
 }
- .footer {
-	border-top: dotted;
-	border-width: 1px;
-	width: 100%;
-	position:fixed;
-	bottom:0;
-	background-color: black;
-}
- .speedbar {
- 	width:30px;
-}
 .progress-bar {
 	border-style: solid; border-width: 2px; border-color:#fff;
 	max-width: 350px;
@@ -76,26 +77,24 @@ body {
 	background-color: #fff;
 	width: 0%;
 }
-.context-upgrade {
+.context {
 	border-style: solid; border-width: 2px; border-color:#fff;
 	max-width: 350px;
 	margin: 0 auto;
-	margin-top: 5px;
+	margin-top: 17px;
 }
 .worker {
 	font-weight: bold;
-	border-top-style:solid;
 }
 .workersub {
 	padding-left: 10px;
 }
-.context-upgrade h3 {
+.context h3 {
 	margin-top: 5px; margin-bottom: 0px;
-	border-bottom-style: dotted; border-width: 1px;
+	border-bottom-style: solid; border-width: 3px;
 	padding-left: 5px;
 }
 .description {
-	margin-top: 5px;
 	border-style: dashed; border-width: 1px;
 	padding-left: 5px;
 }
@@ -107,7 +106,7 @@ button:disabled {
 	font-size: 15px;
 	padding-left: 2px; padding-right: 2px;
 }
-button:active {
+button:active:not([disabled]) {
 	border-style: solid; border-color: green;
 	background-color: black;
 	color: green;
@@ -120,4 +119,7 @@ button {
 	color: white;
 	font: inherit; font-size: 15px;
 	padding-left: 2px; padding-right: 2px;
+}
+li {
+	list-style-position: inside;
 }
