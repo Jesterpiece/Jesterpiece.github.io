@@ -123,3 +123,24 @@ button {
 li {
 	list-style-position: inside;
 }
+.ach-left-div img {
+	width: 60%;
+    border-style: solid;
+    border-width: 1%;
+	padding: 0.1%;
+}
+.ach-right-div {
+	flex: 0 0 80%;
+}
+.ach-left-div {
+	flex: 0 0 20%;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+}
+
+.ach-box {
+	display:flex;
+	padding-top: 4px;
+}

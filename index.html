@@ -5,14 +5,125 @@
   <link rel="icon" href="svg/onion.svg">
 	<link rel="stylesheet" href="styles.css">
     <title>Onions Clicker III</title>
+    <style>
+      .firstbody {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #000;
+      }
+
+      .firstbody h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: white;
+      }
+
+      /* Container for the water bottles */
+      .water-container {
+          display: flex;
+          flex-direction: row; /* Align bottles horizontally */
+          align-items: flex-end; /* Align bottles' bottoms */
+      }
+
+      .water-bottle1 {
+          width: 180px;
+          height: 300px;
+          border: 5px solid #fff;
+          margin: 0 40px; /* Adjust margin to separate the bottles horizontally */
+          position: relative;
+          border-radius: 0 0 20px 20px;
+          display: inline-block;
+          overflow: hidden; /* Clip the overflowing water */
+      }
+
+      .water-level1 {
+          width: 100%;
+          border-radius: 0 0 15px 15px;
+          height: 50%;
+          background: rgb(2,0,36);
+          background: linear-gradient(0deg, rgb(0, 0, 0) 80%, rgb(8, 8, 78) 93%, rgba(0, 212, 255, 1) 100%);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform-origin: -100% -100%; /* Set pivot point to the middle of the bottom */
+      }
+
+      .water-bottle2 {
+          width: 180px;
+          height: 300px;
+          border: 5px solid #fff;
+          margin: 0 40px; /* Adjust margin to separate the bottles horizontally */
+          position: relative;
+          border-radius: 0 0 20px 20px;
+          display: inline-block;
+          overflow: hidden; /* Clip the overflowing water */
+          transform: rotate(45deg)
+      }
+
+      .water-level2 {
+          width: 800%; /* Adjust the width to cover the sides */
+          height: 50%;
+          background: rgb(2, 0, 36);
+          background: linear-gradient(0deg, rgb(0, 0, 0) 80%, rgb(8, 8, 78) 93%, rgba(0, 212, 255, 1) 100%);
+          position: absolute;
+          bottom: 0;
+          left: -315%; /* Adjust the left position to center the water */
+          transform-origin: 50% 100%; /* Set pivot point to the middle of the bottom */
+          transform: rotate(-19deg); /* Initial rotation value */
+      }
+
+      /* Style for the slider */
+      .slider {
+          width: 20%;
+          margin-top: 20px;
+      }
+
+      /* Style for the verification button */
+      .verify-button {
+          margin-top: 10px;
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          cursor: pointer;
+      }
+
+      /* Style for the verification result message */
+      .verification-result {
+          margin-top: 10px;
+          color: white;
+      }
+  </style>
   </head>
   <body>
+    <div class="firstbody" id="firstbody">
+      <h1>Men Verification Check</h1>
+      <div class="water-container">
+          <div class="water-bottle1">
+              <div class="water-level1"></div>
+          </div>
+          <div class="water-bottle2">
+              <div class="water-level2"></div>
+          </div>
+      </div>
+      <!-- Slider for rotating water-level2 -->
+      <input type="range" min="-90" max="53" value="0" class="slider" id="rotateSlider">
+      <!-- Verification button -->
+      <button class="verify-button" id="verifyButton">Verify</button>
+      <!-- Verification result message -->
+      <p class="verification-result" id="verificationResult"></p>
+    </div>
+      <div class="site" id="site" hidden>   
 <div class="Header">Onion Clicker III</div>
 <div class="main">
   <div class="box"> 
 
                 <div class="svgcontainer">
-                  <object id="harvest-btn" onclick="handleHarvestClick()"> <!--The Onion-->
+                  <object id="harvest-btn" onclick="handleHarvestClick()" onclick="handleHarvestClick()"> <!--The Onion-->
                     <img id="OnionButton" class="onion" src="svg/onion.svg" viewBox="0 0 100 100">
                   </object>
                   <div class="description">Click the Onion!</div>
@@ -23,7 +134,7 @@
 
 	  <div class="Numberdisplay">Per Harvest: <span id="per-harvest">1</span></div>
 	  <div class="stock">
-	  Onion Market Price: <span id="stock-price">1</span> (<span id="stock-change">0%</span>) <span id="stock-updates"></span>
+      🧅 Market Price: <span id="stock-price">1</span> (<span id="stock-change">0%</span>) <span id="stock-updates"></span>
 	  <canvas class="chart" id="stockchart"></canvas>
 	  </div>
     <div class="Numberdisplay"><button id="sell-btn" disabled>Sell Onions</button> Cash: <span id="cash">0</span></div>
@@ -46,7 +157,7 @@
   <!--Monkey sub-->
   <div class="workersub">Level: <span id="monkey-lvl"></span></div>
   <div class="workersub">-Cost: <span class="worker-cost" id="monkey-cost"></span></div>
-  <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of Onions</div>
+  <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of 🧅</div>
   <div class="description">This monkey wants money instead of bananas? bit weird! how could that be!
   </div>
   
@@ -64,9 +175,28 @@
   <!--Clown sub-->
   <div class="workersub">Level: <span id="clown-lvl"></span></div>
   <div class="workersub">-Cost: <span class="worker-cost" id="clown-cost"></span></div>
-  <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of Onions</div>
+  <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of 🧅</div>
   <div class="description">A clown, slightly better than an African.
   </div>
+
+    <!-------------------------------------------------------------------------------------------------------->
+  
+    <div class="worker" id="malcolm">
+      <button id="malcolm-buy" class="buy-btn">Buy</button> Malcolm
+    </div>
+    
+    <!--Malcolm bar-->
+    <div class="progress-bar" id="malcolm-progress">
+      <div class="progress" id="malcolm-progress-bar"></div>
+    </div>
+    
+    <!--Malcolm sub-->
+    <div class="workersub">Level: <span id="malcolm-lvl"></span></div>
+    <div class="workersub">-Cost: <span class="worker-cost" id="malcolm-cost"></span></div>
+    <div class="workersub">-Per Harvest: <span id="malcolm-harvest"></span>KG of 🧅</div>
+    <div class="description">"You're not the boss of me.. now?"
+    </div>
+    
   </div>  <!--Box-->
 
 
@@ -74,17 +204,41 @@
   </div>
   <div class="box">
     <div class="context">
-    <h3>Current Goals, Either done or not</h3>
+    <h3>Achievements</h3>
       <div class="description">
-      <ul>
-        <li>Make Chart Work - Done</li>
-        <li>Make Workers Work - Done</li>
-        <li>Add Upgrades?</li>
-        <li>Add Achievements?</li>
-        <li>??</li>
+        <div class="ach-box">
+          <div class="ach-left-div"><img src="ach01.png"></div>
+          <div class="ach-right-div">
+            <h2>The beginning</h2>
+            Workers harvested 100KG of 🧅 <span id="harvestedProgress0">(0%)</span>
+          </div>
+        </div>
 
-      </ul>
-      </div>
+        <div class="ach-box">
+          <div class="ach-left-div"><img src="ach02.png"></div>
+          <div class="ach-right-div">
+            <h2>Monthly onion supply</h2>
+            Workers harvested 1.5 Tons of 🧅 <span id="harvestedProgress1">(0%)</span>
+          </div>
+        </div>
+
+        <div class="ach-box">
+          <div class="ach-left-div"><img src="ach03.png"></div>
+          <div class="ach-right-div">
+            <h2>There is a potential</h2>
+            Workers harvested 9 Tons of 🧅 <span id="harvestedProgress2">(0%)</span>
+          </div>
+        </div>
+
+        <div class="ach-box">
+          <div class="ach-left-div"><img src="ach04.png"></div>
+          <div class="ach-right-div">
+            <h2>You can still make more onions</h2>
+            Workers harvested 99 Tons of 🧅 <span id="harvestedProgress3">(0%)</span>
+          </div>
+        </div>
+
+    </div>
   </div>
   </div>
   
@@ -95,9 +249,12 @@
         </div>
   </div>
   </div>
-  <div class="footer"><center>ver 0.0.4 - Prototype</center></div>
+  <div class="footer"><center>ver 0.0.6 - Prototype</center></div>
+  </div>
   </body>
+<script src="verification.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="script.js">
 </script>
+
 </html>

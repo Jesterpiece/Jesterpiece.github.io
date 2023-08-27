@@ -130,7 +130,7 @@ svg.addEventListener('click', function() {
   }, 100);
 });
 
-// WORKERS!!! Remember that, retard!
+// WORKERS!!! Remember that, retard!!!!
 
 class Worker {
   constructor(name, baseCost, baseHarvest, baseSpeed) {
@@ -158,8 +158,8 @@ class Worker {
     if (cash >= this.cost) {
       cash -= this.cost;
       this.level++;
-      this.updateHarvest();
-      this.cost = Math.ceil(this.cost * 1.2);
+      this.updateHarvest(); // Call updateHarvest() to update perHarvest based on the new level
+      this.cost = Math.ceil(this.cost * 1.9 + 2);
       this.updateDisplay();
       this.startWorking();
       cashEl.innerText = cash.toFixed(2);
@@ -167,7 +167,7 @@ class Worker {
   }
 
   updateHarvest() {
-    this.harvest = this.level * this.baseHarvest;
+    this.perHarvest = this.baseHarvest * this.level;
     this.updateDisplay();
   }
 
@@ -188,12 +188,14 @@ class Worker {
 
   finishWork() {
     this.progress = 0;
-    kgOnions += this.harvest;
+    harvestOnion(true, this.perHarvest); // Pass the worker's total onions harvested
+    kgOnions += this.perHarvest; // No need to add onions here, as it's already added in harvestOnion()
     kgOnionsEl.innerText = kgOnions;
     sellBtn.disabled = false;
     clearInterval(this.timerId);
     this.startWorking();
   }
+
 
   updateProgressBar() {
     const percent = (this.progress / this.maxProgress) * 100;
@@ -207,4 +209,45 @@ class Worker {
   }
 }
 const monkeyWorker = new Worker("monkey", 6, 2, 5);
-const clownWorker = new Worker("clown", 6, 20, 8);
+const clownWorker = new Worker("clown", 30, 5, 8);
+const malcolmWorker = new Worker("malcolm", 250, 16, 12);
+
+monkeyWorker.updateHarvest();
+clownWorker.updateHarvest();
+malcolmWorker.updateHarvest();
+
+let onionsHarvested = 0;
+
+const achievements = [
+  { condition: 100, progress: 0, elementId: "harvestedProgress0" }, // "The beginning" achievement
+  { condition: 1500, progress: 0, elementId: "harvestedProgress1" }, // "Monthly onion supply" achievement
+  // Add more achievements as needed
+];
+
+// Function to update the progress for each achievement based on the onions harvested
+function updateAchievementProgress() {
+  achievements.forEach((achievement, index) => {
+    const progress = (onionsHarvested / achievement.condition) * 100;
+    achievement.progress = Math.min(progress, 100); // Clamp progress to 100%
+    const progressText = document.getElementById(achievement.elementId);
+    progressText.innerText = `(${achievement.progress.toFixed(0)}%)`;
+
+    // Check if the achievement condition is met (harvested enough onions)
+    if (achievement.progress >= 100) {
+      // Add your code to trigger the achievement reward here
+      progressText.style.color = "green";
+    } else {
+      progressText.style.color = "white"; // Reset the text color to white
+    }
+  });
+}
+
+// Function to handle player and worker onion harvests
+function harvestOnion(workerHarvest = false, totalHarvest = 1) {
+  if (workerHarvest) {
+    onionsHarvested += totalHarvest;
+  } else {
+    onionsHarvested++;
+  }
+  updateAchievementProgress(); // Update achievement progress when onions are harvested
+}
