@@ -221,6 +221,8 @@ let onionsHarvested = 0;
 const achievements = [
   { condition: 100, progress: 0, elementId: "harvestedProgress0" }, // "The beginning" achievement
   { condition: 1500, progress: 0, elementId: "harvestedProgress1" }, // "Monthly onion supply" achievement
+  { condition: 9000, progress: 0, elementId: "harvestedProgress1" }, // "Monthly onion supply" achievement
+  { condition: 99000, progress: 0, elementId: "harvestedProgress1" }, // "Monthly onion supply" achievement
   // Add more achievements as needed
 ];
 
