@@ -31,6 +31,6 @@ function changeContent(backgroundImage, customHeaderText, customParagraphText) {
   
     const centerH1 = document.getElementById('center_h1');
     const centerText = document.getElementById('center_text');
-    centerH1.textContent = 'Welcome, Onion friend!';
-    centerText.textContent = 'Here you can find all my projects!';
+    centerH1.textContent = '';
+    centerText.textContent = 'You should have an onion right now';
   }
