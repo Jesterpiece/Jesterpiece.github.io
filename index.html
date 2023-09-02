@@ -1,260 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<meta charset="UTF-8">
-  <link rel="icon" href="svg/onion.svg">
-	<link rel="stylesheet" href="styles.css">
-    <title>Onions Clicker III</title>
-    <style>
-      .firstbody {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          margin: 0;
-          background-color: #000;
-      }
-
-      .firstbody h1 {
-          font-size: 24px;
-          margin-bottom: 20px;
-          color: white;
-      }
-
-      /* Container for the water bottles */
-      .water-container {
-          display: flex;
-          flex-direction: row; /* Align bottles horizontally */
-          align-items: flex-end; /* Align bottles' bottoms */
-      }
-
-      .water-bottle1 {
-          width: 180px;
-          height: 300px;
-          border: 5px solid #fff;
-          margin: 0 40px; /* Adjust margin to separate the bottles horizontally */
-          position: relative;
-          border-radius: 0 0 20px 20px;
-          display: inline-block;
-          overflow: hidden; /* Clip the overflowing water */
-      }
-
-      .water-level1 {
-          width: 100%;
-          border-radius: 0 0 15px 15px;
-          height: 50%;
-          background: rgb(2,0,36);
-          background: linear-gradient(0deg, rgb(0, 0, 0) 80%, rgb(8, 8, 78) 93%, rgba(0, 212, 255, 1) 100%);
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          transform-origin: -100% -100%; /* Set pivot point to the middle of the bottom */
-      }
-
-      .water-bottle2 {
-          width: 180px;
-          height: 300px;
-          border: 5px solid #fff;
-          margin: 0 40px; /* Adjust margin to separate the bottles horizontally */
-          position: relative;
-          border-radius: 0 0 20px 20px;
-          display: inline-block;
-          overflow: hidden; /* Clip the overflowing water */
-          transform: rotate(45deg)
-      }
-
-      .water-level2 {
-          width: 800%; /* Adjust the width to cover the sides */
-          height: 50%;
-          background: rgb(2, 0, 36);
-          background: linear-gradient(0deg, rgb(0, 0, 0) 80%, rgb(8, 8, 78) 93%, rgba(0, 212, 255, 1) 100%);
-          position: absolute;
-          bottom: 0;
-          left: -315%; /* Adjust the left position to center the water */
-          transform-origin: 50% 100%; /* Set pivot point to the middle of the bottom */
-          transform: rotate(-19deg); /* Initial rotation value */
-      }
-
-      /* Style for the slider */
-      .slider {
-          width: 20%;
-          margin-top: 20px;
-      }
-
-      /* Style for the verification button */
-      .verify-button {
-          margin-top: 10px;
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          cursor: pointer;
-      }
-
-      /* Style for the verification result message */
-      .verification-result {
-          margin-top: 10px;
-          color: white;
-      }
-  </style>
+    <title>Jester's Site</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Jester's Site">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   </head>
   <body>
-    <div class="firstbody" id="firstbody">
-      <h1>Men Verification Check</h1>
-      <div class="water-container">
-          <div class="water-bottle1">
-              <div class="water-level1"></div>
-          </div>
-          <div class="water-bottle2">
-              <div class="water-level2"></div>
+    <div class="onion-verification" id="verify">
+      <div class="onion-verification_content">
+        <h1>Do you like Onions?</h1>
+        <p>Answer truthfully!</p>
+          <div class="button_content">
+            <button class="buttons" id="yes-button">Yes</button>
+            <button class="buttons" id="no-button">No</button>
           </div>
       </div>
-      <!-- Slider for rotating water-level2 -->
-      <input type="range" min="-90" max="53" value="0" class="slider" id="rotateSlider">
-      <!-- Verification button -->
-      <button class="verify-button" id="verifyButton">Verify</button>
-      <!-- Verification result message -->
-      <p class="verification-result" id="verificationResult"></p>
     </div>
-      <div class="site" id="site" hidden>   
-<div class="Header">Onion Clicker III</div>
-<div class="main">
-  <div class="box"> 
+  <div class="background-image">
 
-                <div class="svgcontainer">
-                  <object id="harvest-btn" onclick="handleHarvestClick()" onclick="handleHarvestClick()"> <!--The Onion-->
-                    <img id="OnionButton" class="onion" src="svg/onion.svg" viewBox="0 0 100 100">
-                  </object>
-                  <div class="description">Click the Onion!</div>
-                </div>
-
-	  <br>
-	  <div class="Numberdisplay">KG of Onions: <span id="kg-onions">0</span></div>
-
-	  <div class="Numberdisplay">Per Harvest: <span id="per-harvest">1</span></div>
-	  <div class="stock">
-      🧅 Market Price: <span id="stock-price">1</span> (<span id="stock-change">0%</span>) <span id="stock-updates"></span>
-	  <canvas class="chart" id="stockchart"></canvas>
-	  </div>
-    <div class="Numberdisplay"><button id="sell-btn" disabled>Sell Onions</button> Cash: <span id="cash">0</span></div>
-
-<!--Workers-->
-<div class="context">
-  <h3>Workers: 
-  </h3>
-  
-  <!--Monkey-->
-  <div class="worker" id="monkey">
-    <button id="monkey-buy" class="buy-btn">Buy</button> Monkey
-  </div>
-  
-  <!--Monkey bar-->
-  <div class="progress-bar" id="monkey-progress">
-    <div class="progress" id="monkey-progress-bar"></div>
-  </div>
-  
-  <!--Monkey sub-->
-  <div class="workersub">Level: <span id="monkey-lvl"></span></div>
-  <div class="workersub">-Cost: <span class="worker-cost" id="monkey-cost"></span></div>
-  <div class="workersub">-Per Harvest: <span id="monkey-harvest"></span>KG of 🧅</div>
-  <div class="description">This monkey wants money instead of bananas? bit weird! how could that be!
-  </div>
-  
-  <!-------------------------------------------------------------------------------------------------------->
-  
-  <div class="worker" id="clown">
-    <button id="clown-buy" class="buy-btn">Buy</button> Clown
-  </div>
-  
-  <!--Clown bar-->
-  <div class="progress-bar" id="clown-progress">
-    <div class="progress" id="clown-progress-bar"></div>
-  </div>
-  
-  <!--Clown sub-->
-  <div class="workersub">Level: <span id="clown-lvl"></span></div>
-  <div class="workersub">-Cost: <span class="worker-cost" id="clown-cost"></span></div>
-  <div class="workersub">-Per Harvest: <span id="clown-harvest"></span>KG of 🧅</div>
-  <div class="description">A clown, slightly better than an African.
-  </div>
-
-    <!-------------------------------------------------------------------------------------------------------->
-  
-    <div class="worker" id="malcolm">
-      <button id="malcolm-buy" class="buy-btn">Buy</button> Malcolm
+    <header>
+      <div class="header_content">
+        <img class="logo" src="images/jesterpiece_text.svg">
+        <nav>
+          <ul class="nav_links">
+            <li><a href="game/OC3/index.html" onmouseover="changeContent('images/background1.png', 'Onion Clicker 3', 'The best clicker there is!')" onmouseout="resetContent()">Onion Clicker 3</a></li>
+            <li><a href="#" onmouseover="changeContent('images/background2.jpg', 'Fumo News', 'Fumo News report breaking news around the World!')" onmouseout="resetContent()">Fumo News</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="center_content">
+        <div class="center_text">
+          <h1 id="center_h1">Welcome, friend!</h1>
+          <p id="center_text">Here you can find all my projects!</p>
+        </div>
+      </div>
     </div>
-    
-    <!--Malcolm bar-->
-    <div class="progress-bar" id="malcolm-progress">
-      <div class="progress" id="malcolm-progress-bar"></div>
-    </div>
-    
-    <!--Malcolm sub-->
-    <div class="workersub">Level: <span id="malcolm-lvl"></span></div>
-    <div class="workersub">-Cost: <span class="worker-cost" id="malcolm-cost"></span></div>
-    <div class="workersub">-Per Harvest: <span id="malcolm-harvest"></span>KG of 🧅</div>
-    <div class="description">"You're not the boss of me.. now?"
-    </div>
-    
-  </div>  <!--Box-->
-
-
-
-  </div>
-  <div class="box">
-    <div class="context">
-    <h3>Achievements</h3>
-      <div class="description">
-        <div class="ach-box">
-          <div class="ach-left-div"><img src="ach01.png"></div>
-          <div class="ach-right-div">
-            <h2>The beginning</h2>
-            Workers harvested 100KG of 🧅 <span id="harvestedProgress0">(0%)</span>
-          </div>
-        </div>
-
-        <div class="ach-box">
-          <div class="ach-left-div"><img src="ach02.png"></div>
-          <div class="ach-right-div">
-            <h2>Monthly onion supply</h2>
-            Workers harvested 1.5 Tons of 🧅 <span id="harvestedProgress1">(0%)</span>
-          </div>
-        </div>
-
-        <div class="ach-box">
-          <div class="ach-left-div"><img src="ach03.png"></div>
-          <div class="ach-right-div">
-            <h2>There is a potential</h2>
-            Workers harvested 9 Tons of 🧅 <span id="harvestedProgress2">(0%)</span>
-          </div>
-        </div>
-
-        <div class="ach-box">
-          <div class="ach-left-div"><img src="ach04.png"></div>
-          <div class="ach-right-div">
-            <h2>You can still make more onions</h2>
-            Workers harvested 99 Tons of 🧅 <span id="harvestedProgress3">(0%)</span>
-          </div>
-        </div>
-
-    </div>
-  </div>
-  </div>
-  
-  <div class="box">
-    <div class="context">
-      <h3>Side Menu</h3>
-        <div class="description"> Lorem ipsum
-        </div>
-  </div>
-  </div>
-  <div class="footer"><center>ver 0.0.6 - Prototype</center></div>
-  </div>
+    </main>
+    <script src="script.js"></script>
   </body>
-<script src="verification.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script src="script.js">
-</script>
-
-</html>
+  </html>
+  

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="36.049042mm"
+   height="9.0160656mm"
+   viewBox="0 0 36.049041 9.0160656"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="jesterpiece_text.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1">
+    <rect
+       x="159.96931"
+       y="432.05386"
+       width="451.1955"
+       height="150.3985"
+       id="rect2" />
+  </defs>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-67.214112,-132.318)">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.63467126,0,0,0.70344128,-34.905981,-189.39397)"
+       id="text2"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect2);fill:#4865b1;fill-opacity:1;stroke:#4865b1;stroke-width:0.395981;stroke-opacity:1"
+       inkscape:export-filename="text2.png"
+       inkscape:export-xdpi="263"
+       inkscape:export-ydpi="263"><tspan
+         x="159.96875"
+         y="468.5479"
+         id="tspan9"><tspan
+           style="font-size:8px;fill:#ffffff;stroke:none"
+           id="tspan2">[</tspan><tspan
+           style="font-size:14.6667px;font-family:'Agency FB';-inkscape-font-specification:'Agency FB, Normal';fill:#ffffff;stroke:none"
+           id="tspan7">Jester</tspan><tspan
+           style="font-size:8px;stroke:none"
+           id="tspan8">piece]</tspan></tspan></text>
+  </g>
+</svg>
