@@ -1,136 +1,132 @@
-const harvestBtn = document.getElementById("harvest-btn");
-const sellBtn = document.getElementById("sell-btn");
-const kgOnionsEl = document.getElementById("kg-onions");
-const cashEl = document.getElementById("cash");
-const perHarvestEl = document.getElementById("per-harvest");
-const stockPriceEl = document.getElementById("stock-price");
-const stockChangeEl = document.getElementById("stock-change");
-const stockUpdatesEl = document.getElementById("stock-updates");
-sellBtn.addEventListener("click", handleSellClick);
-
-let kgOnions = 0;
+let onionCount = 0;
 let cash = 0;
+let exp = 0;
+let level = 1;
+let requiredExp = 20;
+let perkPointsCount = 0;
+let doubleHarvest = 0.1; 
+let expPerClick = 1;
+let stamina = 1000;
+let maxStamina = 1000;
+let staminaDrain = 10;
 let perHarvest = 1;
-let stockPrice = 1;
-let stockPriceHistory = [];
-let stockUpdatesInterval;
+let onionPrice = 0.5;
 
-// Define a function to handle the "Harvest Onions" button click
-function handleHarvestClick() {
-  // Increase the number of onions by the perHarvest value and update the UI
-  kgOnions += perHarvest;
-  kgOnionsEl.innerText = kgOnions;
+// Initial values for attributes
+let strength = 1;
+let intelligence = 1;
+let endurance = 1;
+let luck = 1;
 
-  // Update the "Per Harvest" display
-  perHarvestEl.innerText = perHarvest;
-
-  // Enable the "Sell Onions" button
-  sellBtn.disabled = false;
-}
-
-function handleSellClick() {
-  // Update the cash value and update the UI
-  cash += kgOnions * stockPrice;
-  cashEl.innerText = cash.toFixed(2);
-
-  // Decrease the number of onions by the amount sold and update the UI
-  kgOnions = 0;
-  kgOnionsEl.innerText = kgOnions;
-
-  // Disable the "Sell Onions" button
-  sellBtn.disabled = true;
-}
-
-const chart = new Chart("stockchart", {
-  type: "line",
-  data: {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8],
-    datasets: [
-      {
-        fill: false,
-        lineTension: 0,
-        backgroundColor: "rgba(255,0,0,1.0)",
-        borderColor: "rgba(255,255,255,1.0)",
-        data: []
-      }
-    ]
-  },
-  options: {
-    legend: { display: false },
-    scales: {
-      yAxes: [{ ticks: { min: 0, max: 3 } }],
-      xAxes: [{ ticks: { min: 1, max: 8, display: false } }]
+function clickOnion() {
+  if (stamina >= staminaDrain) {
+    // Check for double harvest chance
+    if (Math.random() <= doubleHarvest) {
+      onionCount += 2 * strength; // Double yield for double harvest
+    } else {
+      onionCount += strength; // Regular yield
     }
-  }
-});
 
-const addData = (data) => {
-  const chartData = chart.data.datasets[0].data;
-  chartData.push(data);
-  if (chartData.length > 8) {
-    chartData.shift();
-  }
-  chart.update();
-};
+    exp += expPerClick;
+    stamina -= staminaDrain;
 
-// Define a function to update the stock price
-function updateStockPrice() {
-  // Generate a random value between -0.15 and 0.15
-  const stockPriceChange = (Math.random() - 0.5) * 0.3;
 
-  // Calculate the percentage change
-  const stockChange = ((stockPrice + stockPriceChange - stockPrice) / stockPrice) * 100;
-
-  // Clamp the stock price to the range [0.1, 3]
-  stockPrice = Math.max(0.1, Math.min(stockPrice + stockPriceChange, 3));
-  stockPriceEl.innerText = stockPrice.toFixed(2);
-
-  // Update the stock change display
-  const stockChangeEl = document.getElementById("stock-change");
-  stockChangeEl.innerText = `${stockChange.toFixed(2)}%`;
-
-  if (stockChange < 0) {
-    stockChangeEl.style.color = "red";
-  } else if (stockChange > 0) {
-    stockChangeEl.style.color = "green";
-  } else {
-    stockChangeEl.style.color = "white";
-  }
-
-  // Clear the previous interval
-  clearInterval(stockUpdatesInterval);
-
-  // Update the stock updates countdown every second
-  let stockUpdatesCountdown = 30;
-  stockUpdatesEl.innerText = `${stockUpdatesCountdown} seconds`;
-  stockUpdatesInterval = setInterval(() => {
-    stockUpdatesCountdown--;
-    stockUpdatesEl.innerText = `${stockUpdatesCountdown} seconds`;
-    if (stockUpdatesCountdown === 0) {
-      clearInterval(stockUpdatesInterval);
-      updateStockPrice();
+    // Check for level up
+    if (exp >= requiredExp) {
+      levelUp();
     }
-  }, 1000);
 
-  // Add the new stock price to the chart
-  addData(stockPrice);
+    updateUI();
+  }
 }
 
-// Update the stock price every 30 seconds
-updateStockPrice(); // Update stock price on page load
-setInterval(updateStockPrice, 30000);
+function sellOnions() {
+  if (onionCount > 0) {
+    cash += onionCount * onionPrice;
+    onionCount = 0;
+    updateUI();
+  }
+}
 
-// Make Onion scale on click
-const svg = document.getElementById('OnionButton');
+function assignPerk(stat) {
+  if (perkPointsCount > 0) {
+    switch (stat) {
+      case 'strength':
+        strength++;
+        perHarvest++;
+        break;
+      case 'intelligence':
+        intelligence++;
+        expPerClick++;
+        break;
+      case 'endurance':
+        endurance++;
+        maxStamina += 50;
+        break;
+      case 'luck':
+        luck++;
+        doubleHarvest += 0.005;
+        break;
+      default:
+        break;
+    }
 
-svg.addEventListener('click', function() {
-  svg.classList.add('animate');
-  setTimeout(function() {
-    svg.classList.remove('animate');
-  }, 100);
-});
+    perkPointsCount--;
+    updateUI();
+  }
+}
 
-// WORKERS!!! Remember that, retard!!!!
+function levelUp() {
+  level++;
+  exp = 0; // Reset current exp to 0 upon leveling up
+  requiredExp = Math.floor(level * 1.5) * 10;
+  perkPointsCount++;
+  updateUI();
+}
+
+function regenerateStamina() {
+  // Regenerate stamina by 5 every second (adjust as needed)
+  if (stamina < maxStamina) {
+    stamina += 5;
+    updateUI();
+  }
+}
+
+// Set interval for stamina regeneration
+setInterval(regenerateStamina, 1000);
+
+function updateUI() {
+  document.getElementById('onionCount').innerText = onionCount;
+  document.getElementById('cash').innerText = cash;
+  document.getElementById('level').innerText = level;
+  document.getElementById('currentExp').innerText = exp;
+  document.getElementById('requiredExp').innerText = requiredExp;
+  document.getElementById('perkPointsCount').innerText = perkPointsCount;
+  document.getElementById('doubleHarvest').innerText = (doubleHarvest * 100).toFixed(1) + '%';
+  document.getElementById('expPerClick').innerText = expPerClick;
+  document.getElementById('staminaDrain').innerText = staminaDrain;
+  document.getElementById('perHarvest').innerText = perHarvest;
+  document.getElementById('strengthValue').innerText = strength;
+  document.getElementById('intelligenceValue').innerText = intelligence;
+  document.getElementById('enduranceValue').innerText = endurance;
+  document.getElementById('luckValue').innerText = luck;
+
+  // Enable/disable sell button based on onion count
+  document.getElementById('sell-btn').disabled = onionCount === 0;
+
+  // Update progress bars
+  document.getElementById('exp-bar').style.width = (exp / requiredExp) * 100 + '%';
+  document.getElementById('staminaBar').style.width = (stamina / maxStamina) * 100 + '%';
+  document.getElementById('staminaLabel').innerText = `${stamina} / ${maxStamina}`;
+}
+
+// Initial UI update
+updateUI();
+
+function toggleCollapse(collapseId) {
+    var collapseDiv = document.querySelector('.' + collapseId);
+    collapseDiv.classList.toggle('hidden');
+  }
 
 class Worker {
   constructor(name, baseCost, baseHarvest, baseSpeed) {
@@ -159,7 +155,7 @@ class Worker {
       cash -= this.cost;
       this.level++;
       this.updateHarvest(); // Call updateHarvest() to update perHarvest based on the new level
-      this.cost = Math.ceil(this.cost * 1.9 + 2);
+      this.cost = Math.ceil(this.cost * 1.5);
       this.updateDisplay();
       this.startWorking();
       cashEl.innerText = cash.toFixed(2);
@@ -188,14 +184,11 @@ class Worker {
 
   finishWork() {
     this.progress = 0;
-    harvestOnion(true, this.perHarvest); // Pass the worker's total onions harvested
-    kgOnions += this.perHarvest; // No need to add onions here, as it's already added in harvestOnion()
-    kgOnionsEl.innerText = kgOnions;
-    sellBtn.disabled = false;
+    onionCount += this.perHarvest; // Add harvested onions to the total count
+    updateUI();
     clearInterval(this.timerId);
     this.startWorking();
   }
-
 
   updateProgressBar() {
     const percent = (this.progress / this.maxProgress) * 100;
@@ -208,46 +201,96 @@ class Worker {
     this.harvestDisplay.innerText = this.harvest;
   }
 }
+const yotsubaWorker = new Worker("yotsuba", 3, 1, 60);
 const monkeyWorker = new Worker("monkey", 6, 2, 5);
 const clownWorker = new Worker("clown", 30, 5, 8);
 const malcolmWorker = new Worker("malcolm", 250, 16, 12);
+const robotWorker = new Worker("robot", 700, 33, 20);
 
 monkeyWorker.updateHarvest();
 clownWorker.updateHarvest();
 malcolmWorker.updateHarvest();
+robotWorker.updateHarvest();
 
-let onionsHarvested = 0;
+var ctx = document.getElementById('onionPriceChart').getContext('2d');
+var onionPriceChart;
 
-const achievements = [
-  { condition: 100, progress: 0, elementId: "harvestedProgress0" }, // "The beginning" achievement
-  { condition: 1500, progress: 0, elementId: "harvestedProgress1" }, // "Monthly onion supply" achievement
-  // Add more achievements as needed
-];
+// Function to initialize or reinitialize the chart
+function initializeChart() {
+  if (onionPriceChart) {
+    onionPriceChart.destroy();
+  }
 
-// Function to update the progress for each achievement based on the onions harvested
-function updateAchievementProgress() {
-  achievements.forEach((achievement, index) => {
-    const progress = (onionsHarvested / achievement.condition) * 100;
-    achievement.progress = Math.min(progress, 100); // Clamp progress to 100%
-    const progressText = document.getElementById(achievement.elementId);
-    progressText.innerText = `(${achievement.progress.toFixed(0)}%)`;
-
-    // Check if the achievement condition is met (harvested enough onions)
-    if (achievement.progress >= 100) {
-      // Add your code to trigger the achievement reward here
-      progressText.style.color = "green";
-    } else {
-      progressText.style.color = "white"; // Reset the text color to white
+  onionPriceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Onion Price',
+        data: [],
+        borderColor: 'rgb(255, 255, 255)',
+        borderWidth: 2,
+        fill: true
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+        
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          beginAtZero: true,
+          ticks:  {
+            display: false}
+        },
+        y: {
+          min: 0,
+          ticks:  {
+            display: false}
+        }
+      },
     }
   });
 }
 
-// Function to handle player and worker onion harvests
-function harvestOnion(workerHarvest = false, totalHarvest = 1) {
-  if (workerHarvest) {
-    onionsHarvested += totalHarvest;
-  } else {
-    onionsHarvested++;
+// Function to update onionPrice and chart
+function updateOnionPriceAndChart() {
+  // Update onionPrice every 30 seconds
+  var onionPrice = Math.random() * 2; // Replace this with your logic to update onionPrice
+  document.getElementById('onionPrice').innerText = onionPrice.toFixed(2);
+
+  // Update chart data
+  var chartData = onionPriceChart.data;
+  var labels = chartData.labels;
+  var dataset = chartData.datasets[0].data;
+
+  // Add the new data
+  labels.push(labels.length);
+  dataset.push(onionPrice);
+
+  // Check if the data array is too long, and remove the oldest value
+  if (labels.length > 14) {
+    dataset.shift();
   }
-  updateAchievementProgress(); // Update achievement progress when onions are harvested
+
+  // Update chart
+  onionPriceChart.update();
+
+  // Update stock change
+  var stockChange = ((onionPrice - dataset[0]) / dataset[0]) * 100;
+  document.getElementById('stock-change').innerText = stockChange.toFixed(2) + '%';
 }
+
+// Set interval for updating onionPrice and chart
+setInterval(function () {
+  updateOnionPriceAndChart();
+
+}, 3000);
+
+// Initial chart initialization
+initializeChart();
+

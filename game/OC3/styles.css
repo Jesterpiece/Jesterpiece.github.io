@@ -6,9 +6,9 @@ body {
 	background-color: black;
 	color: white;
 }
-.Header {
+.header {
 	width: 100%;
-	padding-left: 10px; padding-top: 2px;
+	padding-top: 2px;
 	border-bottom-style:solid; border-width: 2px;
 }
 .footer {
@@ -97,6 +97,12 @@ body {
 .description {
 	border-style: dashed; border-width: 1px;
 	padding-left: 5px;
+	color: gold;
+	
+}
+.descriptionach {
+	border-style: dashed; border-width: 1px;
+	padding-left: 5px;
 }
 button:disabled {
 	border-style: dashed; border-color: darkred;
@@ -124,7 +130,7 @@ li {
 	list-style-position: inside;
 }
 .ach-left-div img {
-	width: 60%;
+	width: 70%;
     border-style: solid;
     border-width: 1%;
 	padding: 0.1%;
@@ -143,4 +149,31 @@ li {
 .ach-box {
 	display:flex;
 	padding-top: 4px;
+}
+.collapsebutton {
+	float: right;
+	margin-top: -2px;
+}
+
+.hidden {
+	display: none;
+}
+.title {
+	color: gold;
+	padding-left: 10px;
+}
+.stat-actual {
+	color: gold;
+	padding-left: 10px;
+	padding-top: 2px; padding-bottom: 2px;
+}
+.progress-label {
+	color: white;
+	position: absolute;
+	max-width: 100%;
+	left: 50%; /* Set left to 50% for centering */
+  transform: translateX(-50%); /* Adjust for half of the element's width */
+  font-weight: 900;
+  vertical-align: middle;
+  mix-blend-mode: difference;
 }
