@@ -95,9 +95,10 @@ body {
 	padding-left: 5px;
 }
 .description {
-	border-style: dashed; border-width: 1px;
+	border-top-style: dashed; border-width: 1px; border-bottom-style: solid;
 	padding-left: 5px;
 	color: gold;
+	margin-bottom: 8px; margin-top: 6px;
 	
 }
 .descriptionach {
@@ -176,4 +177,7 @@ li {
   font-weight: 900;
   vertical-align: middle;
   mix-blend-mode: difference;
+}
+p {
+	padding-top: 5px; padding-bottom: 5px,
 }

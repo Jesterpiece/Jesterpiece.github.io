@@ -125,6 +125,17 @@
     🧅 Market Price: <span id="onionPrice">0.5</span> (<span id="stock-change">0%</span>) <span id="stock-updates"></span>
   <canvas class="chart" id="onionPriceChart"></canvas>
   </div>
+  <div class="context">
+    <div class="header"><span class="title">Market information</span><button class="collapsebutton" onclick="toggleCollapse('collapse4')" style="border-color: darkred; color: red">[-]</button></div>
+  <div class="collapse4">
+    <div class="description">
+      
+<p>Currently, the market range for your 🧅 is constrained between <span style="color: white">$0.1</span> and <span style="color: white">$5</span>.</p> 
+<p>Each market tick will take <span style="color: white">10</span> seconds, and the upcoming 🧅 price will fluctuate within a range of <span style="color: white">+30%</span> to <span style="color: white">-30%</span> of the last price.</p>
+<p>If the market price is below <span style="color: white">$0.3</span> for too long, it will increase around <span style="color: white">300%</span></p> and if it's above <span style="color: white">$3</span> for too long, it could fall by <span style="color: white">70%</span> to <span style="color: white">90%</span>
+  </div>
+  </div>
+  </div>
   </div>
   
   
@@ -192,11 +203,13 @@
   <li>Onion upgrade changes visual</li>
 </div>
   </div>
-  <div class="footer"><center>ver 0.1.0 - Prototype</center></div>
+  <div class="footer"><center>ver 0.1.1 - Prototype</center></div>
   </div>
   </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
+<script src="stockmarket.js"></script>
+<script src="workers.js"></script>
 <script src="achievements.js"></script>
 
 </html>
